@@ -2,25 +2,20 @@ package vs1.data;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
+import vs1.view.SwingFrame;
+
 public class Main {
 	
 	public static void main(String[] args){
 		
-		ArrayList<String> list = new ArrayList<String>();
-		fillArray(list);
-
+		SwingFrame frame = new SwingFrame();
+		frame.setTitle("Awesome Search GUI");
+		frame.setSize(450, 360);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setVisible(true);
 		
 	}
-	
-	public static void fillArray(ArrayList<String> list){		
-		list.add("Hopkins");
-		list.add("4711");
-		list.add("Nathan");
-		list.add("0815");
-		list.add("Hanzo");
-		list.add("4711");
-		list.add("Hopkins");
-		list.add("0816");		
-	}
-
 }
