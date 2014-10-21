@@ -27,7 +27,7 @@ public class PhoneThread extends Thread {
     			resultList.add(list.get(i - 1));
     			resultList.add(list.get(i));
 
-    			System.out.println("Name: " + list.get(i - 1)+ " PhoneNumber: " + list.get(i));
+//    			System.out.println("Name: " + list.get(i - 1)+ " PhoneNumber: " + list.get(i));
     		}
     	}
        

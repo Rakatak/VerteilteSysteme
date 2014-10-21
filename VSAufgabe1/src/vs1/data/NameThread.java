@@ -27,7 +27,7 @@ public class NameThread extends Thread {
     			resultList.add(list.get(i));
     			resultList.add(list.get(i + 1));
 
-    			System.out.println("Name: " + list.get(i)+ " Phone Number: " + list.get(i + 1));
+//    			System.out.println("Name: " + list.get(i)+ " Phone Number: " + list.get(i + 1));
     		}
     	}
        

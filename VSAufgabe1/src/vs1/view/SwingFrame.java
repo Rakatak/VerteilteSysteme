@@ -58,7 +58,12 @@ public class SwingFrame extends JFrame implements ActionListener {
 			PhoneThread numThread = null;
 			NameThread namThread = null;
 
+			if (inputNumber.getText().isEmpty() && inputName.getText().isEmpty()) {
+				System.err.println("Please Enter a Name or Number");
+				return;
+				}
 
+			
 			if (!inputNumber.getText().isEmpty()) {
 				System.out.println("PhoneThread started");
 				numThread = new PhoneThread(inputNumber.getText(), PhoneBook.list, numResult);
@@ -69,7 +74,7 @@ public class SwingFrame extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
+			} 
 			
 			if (!inputName.getText().isEmpty()) {
 				System.out.println("NameThread started");
