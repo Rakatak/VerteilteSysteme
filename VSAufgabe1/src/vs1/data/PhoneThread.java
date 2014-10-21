@@ -1,4 +1,3 @@
-package vs1.data;
 
 import java.util.ArrayList;
 
@@ -20,6 +19,7 @@ public class PhoneThread extends Thread {
        this.resultList = resultList;
     }
 
+    //the thread is started searching for numbers
     @Override
     public void run() {
     	for (int i = 1; i < list.size(); i += 2){

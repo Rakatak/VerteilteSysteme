@@ -1,6 +1,11 @@
-package vs1.data;
-
 import java.util.ArrayList;
+
+
+/**
+* This Class represents the PhoneBook used for searching
+* The class contains a static final ArrayList<String> as the book
+* @author  Robin Steller
+*/
 
 public final class PhoneBook {
 	
@@ -13,5 +18,9 @@ public final class PhoneBook {
 		add("4711");
 		add("Hopkins");
 		add("0816");
+		add("Von Knotenknut");
+		add("8008");
+		add("N\u00f6ga");
+		add("6565");
 		}};
 }

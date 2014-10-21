@@ -10,9 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import vs1.data.NameThread;
-import vs1.data.PhoneBook;
-import vs1.data.PhoneThread;
+/**
+* This Class represents the GUI for the first Task.
+* The GUI is designed with Swing
+* @author  Robin Steller
+*/
+
 
 @SuppressWarnings("serial")
 public class SwingFrame extends JFrame implements ActionListener {
@@ -23,6 +26,7 @@ public class SwingFrame extends JFrame implements ActionListener {
 	JTextField inputName;
 	JLabel numLabel;
 	JLabel namLabel;
+
 
 	public SwingFrame() {
 
@@ -48,6 +52,8 @@ public class SwingFrame extends JFrame implements ActionListener {
 
 	}
 
+
+    //Action for clicking on the Search Button, initiates the Threads for searching in PhoneBook array, if at least one textfield contains characters
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == searchButton) {
@@ -56,28 +62,37 @@ public class SwingFrame extends JFrame implements ActionListener {
 			PhoneThread numThread = null;
 			NameThread namThread = null;
 
+			//return error message for entering characters into at least one textfield
 			if (inputNumber.getText().isEmpty() && inputName.getText().isEmpty()) {
 				System.err.println("Please Enter a Name or Number");
 				return;
 				}
 
-			
-			if (!inputNumber.getText().isEmpty()) {
+			//thread searching for phonenumber is started
+			if (inputNumber.getText().matches(".*\\w.*")) {
 				System.out.println("PhoneThread started");
 				numThread = new PhoneThread(inputNumber.getText(), PhoneBook.list, numResult);
 				numThread.start();	
+			} 
+			
+			//thread searching for name is started
+			if (inputName.getText().matches(".*\\w.*"))  {
+				System.out.println("NameThread started");
+				namThread = new NameThread(inputName.getText(), PhoneBook.list, namResult);
+				namThread.start();	
+			}
+			
+			//now both threads will be joined if initiated
+			if (numThread != null)  {
 				try {
 					numThread.join();
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			} 
-			
-			if (!inputName.getText().isEmpty()) {
-				System.out.println("NameThread started");
-				namThread = new NameThread(inputName.getText(), PhoneBook.list, namResult);
-				namThread.start();	
+			}
+
+                         if (namThread != null) {
 				try {
 					namThread.join();
 				} catch (InterruptedException e1) {
@@ -85,12 +100,17 @@ public class SwingFrame extends JFrame implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
-			
-			
-			
+
+
+			// after threads are joined, both array are joined and printed on console
 			numResult.addAll(namResult);
+			if (numResult.size()==0){
+			    System.out.println("Suche nach " + inputName.getText()+  "  " + inputNumber.getText() + "   war erfolglos");
+			    	} else {
+			System.out.println("-----------------Results---------------");
 			for (int i = 0; i < numResult.size() - 1 ; i += 2){
-    			System.out.println("Name: " + numResult.get(i)+ " Phone Number: " + numResult.get(i + 1));
+    			System.out.println("Name: " + numResult.get(i) + "   Number: " + numResult.get(i + 1));
+				}
 			}
 			
 		}

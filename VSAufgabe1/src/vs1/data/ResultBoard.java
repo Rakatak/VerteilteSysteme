@@ -1,8 +1,12 @@
-package vs1.data;
-
 import java.util.ArrayList;
 
-public class ResultBoard extends AbstractModel {
+/**
+* This Class represents a global array used to store the final search results
+* @author  Robin Steller
+*/
+
+
+public class ResultBoard {
 
 	public static ArrayList<String> resutList = new ArrayList<String>();
 }

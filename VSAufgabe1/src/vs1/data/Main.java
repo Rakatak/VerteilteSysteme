@@ -1,10 +1,13 @@
-package vs1.data;
-
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import vs1.view.SwingFrame;
+/**
+* This Class represents the Main Method for the PhoneSearch GUI Program
+* The Main method initiates the SwingFrame as a GUI
+* @author  Robin Steller
+*/
+
 
 public class Main {
 	

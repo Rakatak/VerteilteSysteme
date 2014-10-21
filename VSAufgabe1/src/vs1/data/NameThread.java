@@ -1,9 +1,7 @@
-package vs1.data;
-
 import java.util.ArrayList;
 
 /**
- * This class represents the PhoneThread searching for Phone numbers in the PhoneBook.list
+ * This class represents the NameThread searching for Names in the PhoneBook.list
  * @author Robin
  *
  */
@@ -20,6 +18,7 @@ public class NameThread extends Thread {
        this.resultList = resultList;
     }
 
+    //thread ist started searching for names
     @Override
     public void run() {
     	for (int i = 0; i < list.size(); i += 2){
