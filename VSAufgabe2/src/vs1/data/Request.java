@@ -47,6 +47,10 @@ class Request {
             zeile = br.readLine();
             System.out.println("Kontrollausgabe: "+zeile);
             
+            if(zeile.equals(null)){
+	      System.out.println("First empty Request");
+	      continue;
+            }
             // Favicon-Requests nicht bearbeiten
             // -------------------------------------------------------
             if(zeile.startsWith("GET /favicon")) {
