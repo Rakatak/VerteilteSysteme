@@ -92,7 +92,7 @@ public class SwingFrame extends JFrame implements ActionListener {
 				}
 			}
 
-                         if (namThread != null) {
+            if (namThread != null) {
 				try {
 					namThread.join();
 				} catch (InterruptedException e1) {

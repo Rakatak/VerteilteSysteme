@@ -20,7 +20,8 @@ public final class PhoneBook {
 		add("0816");
 		add("Von Knotenknut");
 		add("8008");
-		add("N\u00f6ga");
+    add(java.net.URLDecoder.decode("N%C3%BCga", "UTF-8"));
+
 		add("6565");
 		}};
 }
