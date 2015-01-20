@@ -9,6 +9,9 @@
 import java.io.*;      // Fuer den Reader
 import java.net.*;     // Fuer den Socket
 import java.util.ArrayList;
+import java.rmi.*;
+import java.rmi.registry.*;
+import java.rmi.server.*;
 
 
 class Request {
@@ -35,6 +38,12 @@ class Request {
         System.out.println();
         System.out.println("##########################################");
         System.out.println("#### Server startet auf " + host + " an " + port + " ####");
+        System.out.println("##########################################\n\n");
+        
+        System.out.println("##########################################");
+        ServerInterface rmi =
+        (ServerInterface)Naming.lookup("hello-server");
+        System.out.println(rmi.start());
         System.out.println("##########################################");
 
         // ServerSocket einrichten und in einer Schleife auf
@@ -61,11 +70,7 @@ class Request {
             String name           = null;             // input name
             String number         = null;	      // input number
             ArrayList<String> numResult = new ArrayList<String>();
-            ArrayList<String> namResult = new ArrayList<String>();
-            PhoneThread numThread = null;
-            NameThread namThread = null;
-            
-            
+
             zeile1 = br.readLine();
             // decode url for umlaute 
 
@@ -121,6 +126,10 @@ class Request {
                         pw.println("</body>");
                         pw.println("</html>");
                         
+                        rmi.stop();
+                        
+                        Thread.sleep(3000);
+                        
                         pw.flush();
                         pw.close();
                         br.close();
@@ -160,74 +169,24 @@ class Request {
 
             }
             
-           //Start of configure request
             if (name != null || number != null) {
-               if (!name.isEmpty() || !number.isEmpty()) {
-		  if (!name.trim().isEmpty() || !number.trim().isEmpty()) {
-		                  if (number.matches(".*\\w.*") || name.matches(".*\\w.*")) {
+                if (!name.isEmpty() || !number.isEmpty()) {
+                    if (!name.trim().isEmpty() || !number.trim().isEmpty()) {
+                        if (number.matches(".*\\w.*") || name.matches(".*\\w.*")) {
+                            pw.println("Sending Request to RMI-Server");               // Der Header
 
-			System.out.println("Request wird bearbeitet");
-			System.out.println("***********************");
-			
-			//starting number thread
-			if (number.matches(".*\\w.*")) {
-			    System.out.println("+++PhoneThread started+++");
-			    numThread = new PhoneThread(number, PhoneBook.list, numResult);
-			    numThread.start();	
-			}
-			
-			//starting name thread
-			if (name.matches(".*\\w.*"))  {
-			    System.out.println("+++NameThread started+++");
-			    namThread = new NameThread(name, PhoneBook.list, namResult);
-			    namThread.start();	
-			}
-			
-			//join both threads
-			if (numThread != null)  {
-			    try {
-				System.out.println("+++PhoneThread joined+++");
-				numThread.join();
-			    } catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			    }
-			}
-			
-			if (namThread != null) {
-			    try {
-				System.out.println("+++NameThread joined+++");
-				namThread.join();
-			    } catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			    }
-			}
-			  // after threads are joined, both array are joined and printed on console
-			numResult.addAll(namResult);
-			  if (numResult.size() == 0){
-			      System.out.println();
-			      System.out.println("Suche nach " + name +  "  " + number + "   war erfolglos");
-			      System.out.println();
+                            numResult = rmi.search(name, number);
 
-			  } else {
-			      System.out.println();
-			      System.out.println("-----------------Results-----------------");
-			      for (int i = 0; i < numResult.size() - 1 ; i += 2){
-				  System.out.println("Name: " + numResult.get(i) + "   Number: " + numResult.get(i + 1));
+                            pw.println("Got Data Back from RMI-Server");
+                            pw.println("Will be displayed in Browser");               // Der Header
+// Der Header
 
-			      }
-			      System.out.println();
-
-			  }
-			
-		      
-			}
-		  }
-	      }
-
-                
+                        }
+                    }
+                }
             }
+            
+           
             
             
             //Open outpotstream  for creating html page
