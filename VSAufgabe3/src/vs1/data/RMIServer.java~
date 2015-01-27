@@ -88,7 +88,7 @@ implements ServerInterface {
     }
     
     //method for disconnecting unregister server and closing afterwards
-    public void stop() throws RemoteException, NotBoundException, MalformedURLException, InterruptedException, Exception {
+    public void stop() throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         System.out.println("\n\n############################################");
         System.out.println("############# Closing RMI-Server ###########");
         System.out.println("############################################");
