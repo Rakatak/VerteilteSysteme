@@ -14,11 +14,13 @@ implements ServerInterface {
     
     public RMIServer() throws RemoteException {}
     
+    //Test method for validating connection
     public String start() throws RemoteException {
         System.out.println("----Receiving first RMI----");
         return "######    RMI-Server(1099) Found    ######";
     }
-    
+
+    //Search method for getting the input of RMI
     public ArrayList<String> search(String name, String number) throws RemoteException {
         ArrayList<String> numResult = new ArrayList<String>();
         ArrayList<String> namResult = new ArrayList<String>();
@@ -85,6 +87,7 @@ implements ServerInterface {
         return numResult;
     }
     
+    //method for disconnecting unregister server and closing afterwards
     public void stop() throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         System.out.println("\n\n############################################");
         System.out.println("############# Closing RMI-Server ###########");
@@ -95,7 +98,7 @@ implements ServerInterface {
         System.out.println("############# RMI-Server Closed ############");
         System.out.println("############################################");    }
     
-    
+    //main
     public static void main(String[] args) throws Exception {
         LocateRegistry.createRegistry(1099);     // Port 1099
         RMIServer rmiServer = new RMIServer();

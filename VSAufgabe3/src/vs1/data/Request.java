@@ -179,7 +179,6 @@ class Request {
 
                             pw.println("Got Data Back from RMI-Server");
                             pw.println("Will be displayed in Browser");               // Der Header
-// Der Header
 
                         }
                     }
