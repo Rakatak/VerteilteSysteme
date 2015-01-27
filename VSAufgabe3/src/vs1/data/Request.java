@@ -42,7 +42,7 @@ class Request {
         
         System.out.println("##########################################");
         ServerInterface rmi =
-        (ServerInterface)Naming.lookup("hello-server");
+        (ServerInterface)Naming.lookup("rmi://"+ args[0] + "/hello-server");
         System.out.println(rmi.start());
         System.out.println("##########################################");
 
