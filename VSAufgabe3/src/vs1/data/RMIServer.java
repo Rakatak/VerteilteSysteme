@@ -92,7 +92,7 @@ implements ServerInterface {
         System.out.println("\n\n############################################");
         System.out.println("############# Closing RMI-Server ###########");
         System.out.println("############################################");
-        Naming.unbind("hello-server");
+        Naming.unbind("rmi://"+ InetAddress.getLocalHost().getHostName() + "/hello-server");
         UnicastRemoteObject.unexportObject(this, true);
         System.out.println("\n\n############################################");
         System.out.println("############# RMI-Server Closed ############");
@@ -106,7 +106,7 @@ implements ServerInterface {
         // Anmeldung des Dienstes mit
         // rmi://Serverhostname/Eindeutige Bezeichnung des Dienstes
         // ---------------------------------------------------------
-        Naming.rebind("hello-server", rmiServer);
+        Naming.rebind("rmi://"+ InetAddress.getLocalHost().getHostName() + "/hello-server", rmiServer);
         System.out.println("############################################");
         System.out.println("############# RMI-Server started ###########");
         System.out.println("############################################\n\n");    }
